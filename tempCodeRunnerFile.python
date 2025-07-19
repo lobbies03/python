@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+from pathlib import Path
+
+# Pfade zu den Listen
+file_a = Path('filenames_a.txt')
+file_b = Path('filenames_b.txt')
+
+# Einlesen und nur die Dateinamen (basename) extrahieren
+names_a = {Path(line.strip()).name for line in file_a.read_text(encoding='utf-8').splitlines() if line.strip()}
+names_b = {Path(line.strip()).name for line in file_b.read_text(encoding='utf-8').splitlines() if line.strip()}
+
+# Schnittmenge bilden
+common = sorted(names_a & names_b)
+
+# Ausgabe
+print(f"Dateinamen in beiden Listen ({len(common)}):")
+for name in common:
+    print(name)
